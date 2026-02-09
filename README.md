@@ -1,6 +1,6 @@
-# 🎄 ChristmasPlayer — Local Music Player with Lyrics Sync
+# 🎵 LYRICSPlayer — Local Music Player with Lyrics Sync
 
-**ChristmasPlayer** is a fully local music player that lets you play your own MP3 songs with synchronized lyrics — no internet, no APIs, no subscriptions.
+**LYRICSPlayer** is a fully local music player that lets you play your own MP3 songs with synchronized lyrics —  no subscriptions.
 
 Download once. Play forever.
 
@@ -19,8 +19,8 @@ Download once. Play forever.
 
 ## 📁 Project Structure
 
-ChristmasPlayer/
-├── christmas.exe # Main application
+LYRICSPlayer/
+├── player.exe # Main application
 
 ├── convert.bat # Auto MP3 → WAV converter
 
@@ -111,6 +111,7 @@ Your music. Your control.
 ## 🛠️ Future Improvements (Ideas)
 
 - GUI enhancements
+- LRC API to get the lyrics automatical
 - Manual lyrics sync editor
 - Playlist support
 - Visual audio effects
@@ -131,4 +132,4 @@ The author is **not responsible for any copyright violations, legal issues, or d
 
 ---
 
-🎅 Built for learning, fun, and full control over your music 🎄
+ Built for learning, fun, and full control over your music 
