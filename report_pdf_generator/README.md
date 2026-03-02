@@ -1,4 +1,4 @@
-# Assignment Report Generator
+# Report PDF Generator
 
 **A deterministic, local-first PDF generation system for structured academic submissions.**
 
@@ -65,7 +65,11 @@ The goal was to design a small-scale system that mirrors quantitative and system
 2. **Stage:** Place your screenshots in the `/input` folder following the `Q{n}_{sub}.png` naming convention.
 3. **Execute:** Run the generator to compute the layout and render the PDF.
 
-##bash
+---
+
+## bash
 python main.py
 
-##This project is small in scope, but intentionally structured like a system rather than a script.
+---
+
+## This project is small in scope, but intentionally structured like a system rather than a script.
