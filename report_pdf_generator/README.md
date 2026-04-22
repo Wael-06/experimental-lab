@@ -6,6 +6,16 @@ This project is a constraint-based rendering engine designed to transform raw sc
 
 ---
 
+## Download
+
+Latest Release:  
+https://github.com/Wael-06/experimental-lab/releases/latest
+
+⬇ Installer:
+[Download .exe](https://github.com/Wael-06/experimental-lab/releases/latest/download/TheReportGenerator_Setup.exe)
+
+---
+
 ## 🎯 Core Philosophy
 The goal was to design a small-scale system that mirrors quantitative and systems-level problem-solving:
 1. **Define constraints** (Page boundaries, image ratios, margins).
