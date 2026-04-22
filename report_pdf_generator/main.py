@@ -21,8 +21,9 @@ from reportlab.pdfgen import canvas as rl_canvas
 from PIL import Image as PILImage
 
 # ── Constants ─────────────────────────────────────────────────────────────────
-USER_INFO_FILE = "user_info.json"
-REPORTS_BASE_DIR = Path("Reports")
+BASE_DIR         = Path.home() / "Documents" / "ReportGenerator"
+USER_INFO_FILE   = str(BASE_DIR / "user_info.json")
+REPORTS_BASE_DIR = BASE_DIR / "Reports"
 
 PAGE_W, PAGE_H = A4
 MARGIN = 50.0
@@ -43,13 +44,21 @@ FG_DIM       = "#94a3b8"
 INPUT_BG     = "#0d1b2a"
 BUTTON_HVR   = "#5dddf7"
 
-# ── Font sizes bumped up ───────────────────────────────────────────────────────
 FONT_NORMAL     = ("Courier", 11)
 FONT_BOLD       = ("Courier", 11, "bold")
 FONT_SMALL      = ("Courier", 10)
 FONT_ITALIC     = ("Courier", 10, "italic")
 FONT_HEADER     = ("Courier", 22, "bold")
 FONT_ACCENT_LBL = ("Courier", 11, "bold")
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Startup — ensure folders exist
+# ══════════════════════════════════════════════════════════════════════════════
+
+def ensure_dirs():
+    BASE_DIR.mkdir(parents=True, exist_ok=True)
+    REPORTS_BASE_DIR.mkdir(parents=True, exist_ok=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -400,7 +409,6 @@ class App:
         self._build_user_card(content, **pad)
         self._build_mode_card(content, **pad)
 
-        # Group card — built but hidden until group mode selected
         self.group_outer, self.group_inner = make_card(content, title="◈ Group Members")
         self._build_group_inner()
 
@@ -446,7 +454,6 @@ class App:
     def _build_group_inner(self):
         card = self.group_inner
 
-        # ── Save / Load row ───────────────────────────────────────────────────
         save_row = tk.Frame(card, bg=SURFACE)
         save_row.pack(fill="x", pady=(0, 6))
 
@@ -459,7 +466,6 @@ class App:
         make_button(save_row, "💾  Save Group",
                     command=self._save_group).pack(side="left", padx=(0, 6))
 
-        # Dropdown for saved groups
         self.saved_group_var = tk.StringVar(value="Load saved…")
         self.saved_group_menu = tk.OptionMenu(
             save_row, self.saved_group_var, "Load saved…",
@@ -475,7 +481,6 @@ class App:
 
         divider(card)
 
-        # ── Number / generate row ─────────────────────────────────────────────
         top = tk.Frame(card, bg=SURFACE)
         top.pack(fill="x", pady=(0, 10))
 
@@ -496,13 +501,11 @@ class App:
 
         divider(card)
 
-        # Column headers
         header = tk.Frame(card, bg=SURFACE)
         header.pack(fill="x")
         make_label(header, "Name", dim=True).pack(side="left", expand=True, anchor="w")
         make_label(header, "Student ID", dim=True).pack(side="left", padx=24, anchor="w")
 
-        # Dynamic member rows go here
         self.members_container = tk.Frame(card, bg=SURFACE)
         self.members_container.pack(fill="x")
         self.member_vars: list[tuple[tk.StringVar, tk.StringVar]] = []
@@ -763,7 +766,6 @@ class App:
                 if n.get().strip() and i.get().strip()
             ]
 
-            # If not yet saved, offer to save for next time
             current_name  = self.group_name_var.get().strip()
             saved_groups  = self.user_info.get("saved_groups", {})
             if not current_name or current_name not in saved_groups:
@@ -818,6 +820,7 @@ class App:
 # ══════════════════════════════════════════════════════════════════════════════
 
 def main():
+    ensure_dirs()
     root = tk.Tk()
     App(root)
     root.mainloop()
